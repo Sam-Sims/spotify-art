@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron text-center">
+  <h1>Spotify Analysis</h1>
+  <p>Results</p>
+</div>
+ <div class="container">
+    <form action="/go_analyse" method="get">
+        <div class="row">
+            <div class="col text-center">
+                <input type="submit" class="btn btn-info" value="Run Analysis">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

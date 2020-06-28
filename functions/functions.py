@@ -4,7 +4,7 @@ from configparser import ConfigParser
 class Config:
     def __init__(self):
         config = ConfigParser()
-        config.read('./api_keys.ini')
+        config.read('./api_key.ini')
         print('Config Loaded!')
         #  LastFM config
         self.secret_id = config.get('SPOTIFY_API_CONFIGURATION', 'secret')

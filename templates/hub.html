@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+ <div class="container">
+    <div class="row">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Top Artists</h4>
+                    <form action="/go_top_artist_short" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Lockdown artists">
+                    </form>
+                    <p class="card-text">Get your top artists getting you through lockdown!</p>
+                    <br>
+                    <form action="/go_top_artist_medium" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Artists (6 months)">
+                    </form>
+                    <p class="card-text">Get your top artists of the last 6 months!</p>
+                    <br>
+                     <form action="/go_top_artist_long" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Artists (All time)">
+                    </form>
+                    <p class="card-text">Get your top artists of all time!</p>
+                    <br>
+                </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+{% endblock %}

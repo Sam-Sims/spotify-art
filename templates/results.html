@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron text-center">
-  <h1>Spotify Analysis</h1>
-  <p>Results</p>
-</div>
- <div class="container">
-    <div class="">
-			<br />
-			<p> Top Artist 1: {{data['items'][0].get('name')}} </p>
+<div class="container">
+ <div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col text-center">
+                <p> Top Artist 1: {{data['items'][0].get('name')}} </p>
             <p> Top Artist 2: {{data['items'][1].get('name')}} </p>
             <p> Top Artist 3: {{data['items'][2].get('name')}} </p>
+            </div>
+        </div>
     </div>
+
 </div>
 
 {% endblock %}

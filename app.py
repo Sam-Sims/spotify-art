@@ -18,18 +18,28 @@ SCOPE = 'user-top-read'
 def index():
     return render_template('index.html')
 
-@app.route('/done')
-def done():
-    return render_template('done.html')
+@app.route('/hub')
+def hub():
+    return render_template('hub.html')
 
 @app.route('/go', methods=['GET', 'POST'])
 def go():
     auth_url = f'{API_BASE}/authorize?client_id={CLI_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
     return redirect(auth_url)
 
-@app.route('/go_analyse', methods=['GET','POST'])
-def go_analyse():
-    response = functions.get_user_top_artists(session['toke'])
+@app.route('/go_top_artist_short', methods=['GET','POST'])
+def go_analyse_short():
+    response = functions.get_user_top_artists(session['toke'], "short_term")
+    return render_template("results.html", data=response)
+
+@app.route('/go_top_artist_medium', methods=['GET','POST'])
+def go_analyse_medium():
+    response = functions.get_user_top_artists(session['toke'], "medium_term")
+    return render_template("results.html", data=response)
+
+@app.route('/go_top_artist_long', methods=['GET','POST'])
+def go_analyse_long():
+    response = functions.get_user_top_artists(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
 @app.route("/api_callback")
@@ -50,7 +60,7 @@ def api_callback():
     print(res.json())
     session["toke"] = res_body.get("access_token")
 
-    return redirect("done")
+    return redirect("hub")
 
 
 

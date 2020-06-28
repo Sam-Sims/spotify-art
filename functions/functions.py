@@ -11,8 +11,8 @@ class Config:
         self.client_id = config.get('SPOTIFY_API_CONFIGURATION', 'client')
 
 
-def get_user_top_artists(token):
+def get_user_top_artists(token, range):
     sp = spotipy.Spotify(auth=token)
-    response = sp.current_user_top_artists(limit=20, time_range='long_term')
+    response = sp.current_user_top_artists(limit=20, time_range=range)
     print(response)
     return response

@@ -48,6 +48,11 @@ def go_analyse_track():
         response = functions.get_user_top_tracks(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
+@app.route('/go_top_visualise', methods=['POST'])
+def go_visualise():
+    response = functions.get_visulisation_values(session['toke'])
+
+
 @app.route("/api_callback")
 def api_callback():
     session.clear()

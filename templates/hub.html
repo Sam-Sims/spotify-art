@@ -4,27 +4,45 @@
 
  <div class="container">
     <div class="row">
-        <div class="card border-primary mb-3" style="max-width: 20rem;">
+        <div class="col">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <h4 class="card-title">Top Artists</h4>
-                    <form action="/go_top_artist_short" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Lockdown artists">
+                    <form action="/go_top_artist" method="POST">
+                        <input type="submit" class="btn btn-primary" name="submit_artist" value="Top Lockdown artists">
+                        <p class="card-text">Your top artists getting you through lockdown!</p>
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit_artist" value="Top Artists (6 months)">
+                        <p class="card-text">Get your top artists for the last 6 months.</p>
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit_artist" value="Top Artists (All time)">
+                        <p class="card-text">Get your top artists of all time.</p>
+                        <br>
                     </form>
-                    <p class="card-text">Get your top artists getting you through lockdown!</p>
+                </div>
+            </div>
+         </div>
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Top Songs</h4>
+                    <form action="/go_top_track_short" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Lockdown tracks">
+                    </form>
+                    <p class="card-text">Your top tracks getting you through lockdown!</p>
                     <br>
-                    <form action="/go_top_artist_medium" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Artists (6 months)">
+                    <form action="/go_top_track_medium" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Traacks (6 months)">
                     </form>
-                    <p class="card-text">Get your top artists of the last 6 months!</p>
+                    <p class="card-text">Get your top tracks for the last 6 months.</p>
                     <br>
-                     <form action="/go_top_artist_long" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Artists (All time)">
+                     <form action="/go_top_track_long" method="get">
+                        <input type="submit" class="btn btn-primary" value="Top Tracks (All time)">
                     </form>
-                    <p class="card-text">Get your top artists of all time!</p>
+                    <p class="card-text">Get your top tracks of all time.</p>
                     <br>
                 </div>
-        <div class="col"></div>
+            </div>
     </div>
-</div>
+ </div>
 
 {% endblock %}

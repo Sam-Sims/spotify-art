@@ -10,7 +10,6 @@ CLI_SEC = config.secret_id
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
 REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
-
 SCOPE = 'user-top-read'
 
 @app.route('/')
@@ -27,19 +26,30 @@ def go():
     auth_url = f'{API_BASE}/authorize?client_id={CLI_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
     return redirect(auth_url)
 
-@app.route('/go_top_artist_short', methods=['GET','POST'])
+@app.route('/go_top_artist', methods=['POST'])
 def go_analyse_short():
-    response = functions.get_user_top_artists(session['toke'], "short_term")
+    print(request.form)
+    if request.form['submit_artist'] == 'Top Lockdown artists':
+        response = functions.get_user_top_artists(session['toke'], "short_term")
+    elif request.form['submit_artist'] == 'Top Artists (6 months)':
+        response = functions.get_user_top_artists(session['toke'], "medium_term")
+    elif request.form['submit_artist'] == 'Top Artists (All time)':
+        response = functions.get_user_top_artists(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
-@app.route('/go_top_artist_medium', methods=['GET','POST'])
-def go_analyse_medium():
-    response = functions.get_user_top_artists(session['toke'], "medium_term")
+@app.route('/go_top_track_short', methods=['GET','POST'])
+def go_analyse_track_short():
+    response = functions.get_user_top_tracks(session['toke'], "short_term")
     return render_template("results.html", data=response)
 
-@app.route('/go_top_artist_long', methods=['GET','POST'])
-def go_analyse_long():
-    response = functions.get_user_top_artists(session['toke'], "long_term")
+@app.route('/go_top_track_medium', methods=['GET','POST'])
+def go_analyse_track_medium():
+    response = functions.get_user_top_tracks(session['toke'], "medium_term")
+    return render_template("results.html", data=response)
+
+@app.route('/go_top_track_long', methods=['GET','POST'])
+def go_analyse_traack_long():
+    response = functions.get_user_top_tracks(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
 @app.route("/api_callback")

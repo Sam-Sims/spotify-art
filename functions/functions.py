@@ -16,3 +16,9 @@ def get_user_top_artists(token, range):
     response = sp.current_user_top_artists(limit=20, time_range=range)
     print(response)
     return response
+
+def get_user_top_tracks(token, range):
+    sp = spotipy.Spotify(auth=token)
+    response = sp.current_user_top_tracks(limit=20, time_range=range)
+    print(response)
+    return response

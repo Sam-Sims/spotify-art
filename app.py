@@ -27,7 +27,7 @@ def go():
     return redirect(auth_url)
 
 @app.route('/go_top_artist', methods=['POST'])
-def go_analyse_short():
+def go_analyse_artist():
     print(request.form)
     if request.form['submit_artist'] == 'Top Lockdown artists':
         response = functions.get_user_top_artists(session['toke'], "short_term")
@@ -37,19 +37,15 @@ def go_analyse_short():
         response = functions.get_user_top_artists(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
-@app.route('/go_top_track_short', methods=['GET','POST'])
-def go_analyse_track_short():
-    response = functions.get_user_top_tracks(session['toke'], "short_term")
-    return render_template("results.html", data=response)
-
-@app.route('/go_top_track_medium', methods=['GET','POST'])
-def go_analyse_track_medium():
-    response = functions.get_user_top_tracks(session['toke'], "medium_term")
-    return render_template("results.html", data=response)
-
-@app.route('/go_top_track_long', methods=['GET','POST'])
-def go_analyse_traack_long():
-    response = functions.get_user_top_tracks(session['toke'], "long_term")
+@app.route('/go_top_track', methods=['POST'])
+def go_analyse_track():
+    print(request.form)
+    if request.form['submit_tracks'] == 'Top Lockdown tracks':
+        response = functions.get_user_top_tracks(session['toke'], "short_term")
+    elif request.form['submit_tracks'] == 'Top Tracks (6 months)':
+        response = functions.get_user_top_tracks(session['toke'], "medium_term")
+    elif request.form['submit_tracks'] == 'Top Tracks (All time)':
+        response = functions.get_user_top_tracks(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
 @app.route("/api_callback")

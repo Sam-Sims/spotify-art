@@ -25,21 +25,17 @@
             <div class="card border-primary mb-3" style="max-width: 20rem;">
                 <div class="card-body">
                     <h4 class="card-title">Top Songs</h4>
-                    <form action="/go_top_track_short" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Lockdown tracks">
+                    <form action="/go_top_track" method="POST">
+                        <input type="submit" class="btn btn-primary" name="submit_tracks" value="Top Lockdown tracks">
+                        <p class="card-text">Your top tracks getting you through lockdown!</p>
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit_tracks" value="Top Tracks (6 months)">
+                        <p class="card-text">Get your top tracks for the last 6 months.</p>
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit_tracks" value="Top Tracks (All time)">
+                        <p class="card-text">Get your top tracks of all time.</p>
+                        <br>
                     </form>
-                    <p class="card-text">Your top tracks getting you through lockdown!</p>
-                    <br>
-                    <form action="/go_top_track_medium" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Traacks (6 months)">
-                    </form>
-                    <p class="card-text">Get your top tracks for the last 6 months.</p>
-                    <br>
-                     <form action="/go_top_track_long" method="get">
-                        <input type="submit" class="btn btn-primary" value="Top Tracks (All time)">
-                    </form>
-                    <p class="card-text">Get your top tracks of all time.</p>
-                    <br>
                 </div>
             </div>
     </div>

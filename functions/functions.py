@@ -1,5 +1,6 @@
 import spotipy
 from configparser import ConfigParser
+import statistics
 
 class Config:
     def __init__(self):
@@ -14,7 +15,6 @@ class Config:
 def get_user_top_artists(token, range):
     sp = spotipy.Spotify(auth=token)
     response = sp.current_user_top_artists(limit=20, time_range=range)
-    print(response)
     list = []
     for i, item in enumerate(response['items']):
         dictOfArtists = {
@@ -27,7 +27,6 @@ def get_user_top_artists(token, range):
 def get_user_top_tracks(token, range):
     sp = spotipy.Spotify(auth=token)
     response = sp.current_user_top_tracks(limit=20, time_range=range)
-    print(response)
     list = []
     for i, item in enumerate(response['items']):
         dictOfArtists = {
@@ -37,15 +36,56 @@ def get_user_top_tracks(token, range):
             "track_id": item["id"]
         }
         list.append(dictOfArtists)
-    print(list)
     return list
 
 def get_visulisation_values(token):
     sp = spotipy.Spotify(auth=token)
     top_tracks = get_user_top_tracks(token, "long_term")
-    features = [] # Create empty list to store the song features, as spotipy reeturns a dict within a single element list
+    list_of_values = []
     for i, item in enumerate(top_tracks):
-        features = features + sp.audio_features(item['track_id']) # Join each list of audio features into one list as tracks looped through
-        features[0]["track"] = item['name'] # Add track name as that isnt returned by spotify API
-    return features # Returns a list of dictionarys containing audio features for each track
+        features = sp.audio_features(item['track_id']) # Join each list of audio features into one list as tracks looped through
+        track_name = item['name']
+        artist_name = item['artist_name']
+        popularity = item['popularity']
+        for j, items in enumerate(features):
+            dict_of_values = {
+                "name": track_name,
+                "artist_name": artist_name,
+                "popularity": popularity,
+                "danceability": items['danceability'],
+                "energy": items['energy'],
+                "mode": items['mode'],
+                "instrumentalness": items['instrumentalness'],
+                "valence": items['valence'],
+                "key": items['key'],
+            }
+            list_of_values.append(dict_of_values)
+    return list_of_values # Returns a list of dictionarys containing audio features for each track
 
+
+def average_features(features):
+    danceability = []
+    energy = []
+    music_key = []
+    popularity = []
+    valence = []
+    inst = []
+    mode = []
+    for i, item in enumerate(features):
+        danceability.append(item["danceability"])
+        energy.append(item["energy"])
+        music_key.append(item['key'])
+        popularity.append(item['popularity'])
+        valence.append(item['valence'])
+        inst.append(item['instrumentalness'])
+        mode.append(item['mode'])
+    dict_of_avr = {
+        "dance": statistics.mean(danceability),
+        "energy": statistics.mean(energy),
+        "key": statistics.mode(music_key),
+        "popularity": statistics.mean(popularity),
+        "valence": statistics.mean(valence),
+        "inst": statistics.mean(inst),
+        "mode": statistics.mode(mode)
+    }
+    print(dict_of_avr)

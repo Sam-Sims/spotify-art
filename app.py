@@ -51,6 +51,8 @@ def go_analyse_track():
 @app.route('/go_top_visualise', methods=['POST'])
 def go_visualise():
     response = functions.get_visulisation_values(session['toke'])
+    averages = functions.average_features(response)
+    return render_template("visulise.html")
 
 
 @app.route("/api_callback")

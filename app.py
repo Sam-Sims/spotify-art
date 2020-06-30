@@ -2,12 +2,15 @@ from flask import Flask, render_template, redirect, session, request, send_file
 import requests
 from functions import functions
 from functions import imaging
+from os import environ
 
 app = Flask(__name__)
 config = functions.Config()
 app.secret_key = config.secret_id
-CLI_ID = config.client_id
-CLI_SEC = config.secret_id
+#CLI_ID = config.client_id
+#CLI_SEC = config.secret_id
+CLI_ID = environ['client']
+CLI_SEC = environ['secret']
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
 REDIRECT_URI = "http://127.0.0.1:5000/api_callback"

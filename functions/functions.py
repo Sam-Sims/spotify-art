@@ -117,7 +117,7 @@ def evaluate(averages):
 
     if averages['energy'] < 0.5:
         mountain = "red"
-    elif 40 < averages['energy'] > 0.5:
+    elif averages['energy'] > 0.5:
         mountain = "blue"
 
     evaluation = {

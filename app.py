@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, session, request
+from flask import Flask, render_template, redirect, session, request, send_file
 import requests
 from functions import functions
+from functions import imaging
 
 app = Flask(__name__)
 config = functions.Config()
@@ -48,10 +49,16 @@ def go_analyse_track():
         response = functions.get_user_top_tracks(session['toke'], "long_term")
     return render_template("results.html", data=response)
 
-@app.route('/go_top_visualise', methods=['POST'])
-def go_visualise():
+@app.route('/get_image', methods=['GET'])
+def send_image():
     response = functions.get_visulisation_values(session['toke'])
     averages = functions.average_features(response)
+    img = imaging.construct_image(imaging.evaluate(averages))
+    served_image = functions.serve_img(img)
+    return send_file(served_image, mimetype='image/PNG')
+
+@app.route('/go_top_visualise', methods=['POST'])
+def go_visualise():
     return render_template("visulise.html")
 
 

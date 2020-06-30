@@ -1,16 +1,46 @@
 from PIL import Image as image
 
-dict_of_values = {
-    "name": "Cooler",
-    "artist_name": "Gleemer",
-    "popularity": 0.34
-}
 
-def combine():
-    if dict_of_values["popularity"] < 0.4:
-        im1 = image.open('../static/assets/night-background.png')
-        im2 = image.open('../static/assets/forest/trees-medium-pine.png')
-        im1.paste(im2, (0,0), im2)
-        im1.save('test.png', 'PNG')
+def evaluate(averages):
+    print(averages)
+    if averages['mode'] == 0:
+        sky = "night"
+    else:
+        sky = "day"
 
-combine()
+    if averages['bpm'] < 90:
+        forest = "sparse"
+    elif 90 < averages['bpm'] < 120:
+        forest = "medium"
+    elif averages['bpm'] > 120:
+        forest = 'dense'
+
+    if averages['popularity'] < 40:
+        balloons = "sparse"
+    elif 40 < averages['bpm'] < 65:
+        balloons = "medium"
+    elif averages['bpm'] > 65:
+        balloons = 'dense'
+
+    evaluation = {
+        "sky": sky,
+        "forest": forest,
+        "balloons": balloons
+    }
+    print(evaluation)
+    return evaluation
+
+
+def construct_image(evaluation):
+    background_path = "./static/assets/background/" + evaluation['sky'] + "-background.png"
+    background_image = image.open(background_path)
+    tree_path = "./static/assets/trees/trees-" + evaluation['forest'] + "-pine.png"
+    tree_image = image.open(tree_path)
+    balloon_path = "./static/assets/balloons/" + evaluation['balloons'] + "-balloon.png"
+    balloon_image = image.open(balloon_path)
+    background_image.paste(tree_image, (0, 0), tree_image)
+    background_image.paste(balloon_image, (0, 0), balloon_image)
+    background_image.save('test.png', "PNG")
+    return background_image
+
+

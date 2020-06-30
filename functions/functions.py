@@ -1,6 +1,7 @@
 import spotipy
 from configparser import ConfigParser
 import statistics
+from io import StringIO, BytesIO
 
 class Config:
     def __init__(self):
@@ -58,6 +59,7 @@ def get_visulisation_values(token):
                 "instrumentalness": items['instrumentalness'],
                 "valence": items['valence'],
                 "key": items['key'],
+                "bpm": items['tempo']
             }
             list_of_values.append(dict_of_values)
     return list_of_values # Returns a list of dictionarys containing audio features for each track
@@ -71,6 +73,7 @@ def average_features(features):
     valence = []
     inst = []
     mode = []
+    bpm = []
     for i, item in enumerate(features):
         danceability.append(item["danceability"])
         energy.append(item["energy"])
@@ -79,6 +82,7 @@ def average_features(features):
         valence.append(item['valence'])
         inst.append(item['instrumentalness'])
         mode.append(item['mode'])
+        bpm.append(item['bpm'])
     dict_of_avr = {
         "dance": statistics.mean(danceability),
         "energy": statistics.mean(energy),
@@ -86,6 +90,14 @@ def average_features(features):
         "popularity": statistics.mean(popularity),
         "valence": statistics.mean(valence),
         "inst": statistics.mean(inst),
-        "mode": statistics.mode(mode)
+        "mode": statistics.mode(mode),
+        "bpm": statistics.mean(bpm)
     }
     print(dict_of_avr)
+    return dict_of_avr
+
+def serve_img(img):
+    img_io = BytesIO()
+    img.save(img_io, 'PNG', quality=70)
+    img_io.seek(0)
+    return img_io

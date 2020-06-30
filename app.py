@@ -6,7 +6,7 @@ from os import environ
 
 app = Flask(__name__)
 #config = functions.Config()
-#app.secret_key = environ.get("CLIENT")
+app.secret_key = environ.get("secret")
 #CLI_ID = config.client_id
 #CLI_SEC = config.secret_id
 CLI_ID = environ.get("client")

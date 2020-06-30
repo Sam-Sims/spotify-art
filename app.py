@@ -90,4 +90,5 @@ def api_callback():
 
 
 if __name__ == '__main__':
+    app.secret_key = environ.get("secret")
     app.run()

@@ -96,8 +96,66 @@ def average_features(features):
     print(dict_of_avr)
     return dict_of_avr
 
+def evaluate(averages):
+    print(averages)
+    if averages['mode'] == 0:
+        sky = "night"
+    else:
+        sky = "day"
+
+    if averages['bpm'] < 90:
+        forest = "sparse"
+    elif 90 < averages['bpm'] < 120:
+        forest = "medium"
+    elif averages['bpm'] > 120:
+        forest = 'dense'
+
+    if averages['popularity'] < 40:
+        balloons = "sparse"
+    elif 40 < averages['bpm'] < 65:
+        balloons = "medium"
+    elif averages['bpm'] > 65:
+        balloons = 'dense'
+
+    evaluation = {
+        "sky": sky,
+        "forest": forest,
+        "balloons": balloons,
+        "popularity": averages['popularity']
+    }
+    print(evaluation)
+    return evaluation
+
 def serve_img(img):
     img_io = BytesIO()
     img.save(img_io, 'PNG', quality=70)
     img_io.seek(0)
     return img_io
+
+def construct_report(evaluation):
+    report_string = "This is an image dynamically generated using your spotify listening habbits. "
+    if evaluation['sky'] == "day":
+        key = "major"
+    elif evaluation['sky'] == "night":
+        key = "minor"
+    background_string = f"It is {evaluation['sky']}time out representing that the majority of your top songs are in the {key} key. \n"
+    report_string = report_string + background_string
+
+    if evaluation['forest'] == "sparse":
+        forest_explained = "is lower than 90 BPM "
+    elif evaluation['forest'] == "medium":
+        forest_explained = "falls between 91 and 120 BPM "
+    elif evaluation['forest'] == "dense":
+        forest_explained = "is greater than 120 BPM "
+    forest_string = f"The forest is of {evaluation['forest']} thickness because the average BPM of your top songs {forest_explained}. "
+    report_string = report_string + forest_string
+
+    if evaluation['balloons'] == "sparse":
+        balloon_explained = "a few  "
+    elif evaluation['balloons'] == "medium":
+        balloon_explained = "some  "
+    elif evaluation['balloons'] == "dense":
+        balloon_explained = "a large number "
+    balloon_string = f"There are {balloon_explained} balloons which represent the the fact that the average popularity of your top tracks is {evaluation['popularity']} percent. "
+    report_string = report_string + balloon_string
+    return report_string

@@ -53,13 +53,16 @@ def go_analyse_track():
 def send_image():
     response = functions.get_visulisation_values(session['toke'])
     averages = functions.average_features(response)
-    img = imaging.construct_image(imaging.evaluate(averages))
+    img = imaging.construct_image(functions.evaluate(averages))
     served_image = functions.serve_img(img)
     return send_file(served_image, mimetype='image/PNG')
 
 @app.route('/go_top_visualise', methods=['POST'])
 def go_visualise():
-    return render_template("visulise.html")
+    response = functions.get_visulisation_values(session['toke'])
+    evaluation = functions.evaluate(functions.average_features(response))
+    report = functions.construct_report(evaluation)
+    return render_template("visulise.html", report=report)
 
 
 @app.route("/api_callback")

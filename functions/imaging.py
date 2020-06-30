@@ -1,36 +1,5 @@
 from PIL import Image as image
 
-
-def evaluate(averages):
-    print(averages)
-    if averages['mode'] == 0:
-        sky = "night"
-    else:
-        sky = "day"
-
-    if averages['bpm'] < 90:
-        forest = "sparse"
-    elif 90 < averages['bpm'] < 120:
-        forest = "medium"
-    elif averages['bpm'] > 120:
-        forest = 'dense'
-
-    if averages['popularity'] < 40:
-        balloons = "sparse"
-    elif 40 < averages['bpm'] < 65:
-        balloons = "medium"
-    elif averages['bpm'] > 65:
-        balloons = 'dense'
-
-    evaluation = {
-        "sky": sky,
-        "forest": forest,
-        "balloons": balloons
-    }
-    print(evaluation)
-    return evaluation
-
-
 def construct_image(evaluation):
     background_path = "./static/assets/background/" + evaluation['sky'] + "-background.png"
     background_image = image.open(background_path)

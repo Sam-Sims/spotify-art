@@ -1,2 +1,2 @@
 web: gunicorn application:app
-ps:scale web=1
+web: gunicorn bot:app

@@ -1,1 +1,2 @@
 web: gunicorn application:app
+ps:scale web=1

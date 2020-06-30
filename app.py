@@ -5,8 +5,8 @@ from functions import imaging
 from os import environ
 
 app = Flask(__name__)
-config = functions.Config()
-app.secret_key = config.secret_id
+#config = functions.Config()
+app.secret_key = environ['client']
 #CLI_ID = config.client_id
 #CLI_SEC = config.secret_id
 CLI_ID = environ['client']

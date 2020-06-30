@@ -15,7 +15,7 @@ print(environ)
 CLI_SEC = environ.get("secret")
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
-REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com//api_callback"
+REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
 SCOPE = 'user-top-read'
 
 @app.route('/')

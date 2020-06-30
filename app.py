@@ -10,12 +10,10 @@ app = Flask(__name__)
 #CLI_SEC = config.secret_id
 app.secret_key = environ.get("secret")
 CLI_ID = environ.get("client")
-print(CLI_ID)
-print(environ)
 CLI_SEC = environ.get("secret")
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
-REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
+REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
 SCOPE = 'user-top-read'
 
 @app.route('/')
@@ -34,7 +32,6 @@ def go():
 
 @app.route('/go_top_artist', methods=['POST'])
 def go_analyse_artist():
-    print(request.form)
     if request.form['submit_artist'] == 'Top Lockdown artists':
         response = functions.get_user_top_artists(session['toke'], "short_term")
     elif request.form['submit_artist'] == 'Top Artists (6 months)':
@@ -45,7 +42,6 @@ def go_analyse_artist():
 
 @app.route('/go_top_track', methods=['POST'])
 def go_analyse_track():
-    print(request.form)
     if request.form['submit_tracks'] == 'Top Lockdown tracks':
         response = functions.get_user_top_tracks(session['toke'], "short_term")
     elif request.form['submit_tracks'] == 'Top Tracks (6 months)':
@@ -79,13 +75,12 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"https://sam-spotify-flask.herokuapp.com/api_callback",
+        "redirect_uri":"http://127.0.0.1:5000/api_callback",
         "client_id":CLI_ID,
         "client_secret":CLI_SEC
         })
 
     res_body = res.json()
-    print(res.json())
     session["toke"] = res_body.get("access_token")
 
     return redirect("hub")

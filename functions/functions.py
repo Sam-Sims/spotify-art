@@ -93,11 +93,9 @@ def average_features(features):
         "mode": statistics.mode(mode),
         "bpm": statistics.mean(bpm)
     }
-    print(dict_of_avr)
     return dict_of_avr
 
 def evaluate(averages):
-    print(averages)
     if averages['mode'] == 0:
         sky = "night"
     else:
@@ -117,13 +115,18 @@ def evaluate(averages):
     elif averages['bpm'] > 65:
         balloons = 'dense'
 
+    if averages['energy'] < 0.5:
+        mountain = "red"
+    elif 40 < averages['energy'] > 0.5:
+        mountain = "blue"
+
     evaluation = {
         "sky": sky,
         "forest": forest,
         "balloons": balloons,
+        "mountain" : mountain,
         "popularity": averages['popularity']
     }
-    print(evaluation)
     return evaluation
 
 def serve_img(img):
@@ -158,4 +161,11 @@ def construct_report(evaluation):
         balloon_explained = "a large number "
     balloon_string = f"There are {balloon_explained} balloons which represent the the fact that the average popularity of your top tracks is {evaluation['popularity']} percent. "
     report_string = report_string + balloon_string
+
+    if evaluation['mountain'] == "red":
+        mountain_explained = "high  "
+    elif evaluation['mountain'] == "blue":
+        mountain_explained = "low  "
+    mountain_string = f"The mountain is {evaluation['mountain']} because of the {mountain_explained} energy of your top tracks. "
+    report_string = report_string + mountain_string
     return report_string

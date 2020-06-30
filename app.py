@@ -70,8 +70,6 @@ def go_visualise():
 
 @app.route("/api_callback")
 def api_callback():
-    session.clear()
-    app.secret_key = environ.get("secret")
     code = request.args.get('code')
 
     auth_token_url = f"{API_BASE}/api/token"

@@ -10,6 +10,8 @@ app = Flask(__name__)
 #CLI_SEC = config.secret_id
 app.secret_key = environ.get("secret")
 CLI_ID = environ.get("client")
+print(CLI_ID)
+print(environ)
 CLI_SEC = environ.get("secret")
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
@@ -70,6 +72,7 @@ def go_visualise():
 
 @app.route("/api_callback")
 def api_callback():
+    session.clear()
     code = request.args.get('code')
 
     auth_token_url = f"{API_BASE}/api/token"
@@ -90,5 +93,4 @@ def api_callback():
 
 
 if __name__ == '__main__':
-    app.secret_key = environ.get("secret")
     app.run()

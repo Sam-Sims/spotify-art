@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, request, send_file
+from flask import Flask, render_template, redirect, session, request, send_file, send_from_directory
 import requests
 from functions import functions
 from functions import imaging
@@ -13,7 +13,7 @@ CLI_ID = environ.get("client")
 CLI_SEC = environ.get("secret")
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
-REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
+REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
 SCOPE = 'user-top-read'
 
 @app.route('/')
@@ -65,6 +65,12 @@ def go_visualise():
     report = functions.construct_report(evaluation)
     return render_template("visulise.html", report=report)
 
+@app.route('/go_top_visualise_js', methods=['POST'])
+def go_visualise_js():
+    response = functions.get_visulisation_values(session['toke'])
+    data = functions.average_features(response)
+    return render_template("p5js.html", data=data)
+
 
 @app.route("/api_callback")
 def api_callback():
@@ -75,7 +81,7 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"https://sam-spotify-flask.herokuapp.com/api_callback",
+        "redirect_uri":"http://127.0.0.1:5000/api_callback",
         "client_id":CLI_ID,
         "client_secret":CLI_SEC
         })
@@ -84,6 +90,10 @@ def api_callback():
     session["toke"] = res_body.get("access_token")
 
     return redirect("hub")
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 
 

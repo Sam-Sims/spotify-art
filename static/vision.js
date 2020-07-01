@@ -54,7 +54,6 @@ function setGradient(x, y, w, h, c1, c2, axis) {
   function draw() {
     bpm = 120
     fill(255);
-    // We are going to draw a polygon out of the wave points
     beginShape();
   
     let xoff = 0;

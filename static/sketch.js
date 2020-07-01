@@ -25,7 +25,7 @@ function setup() {
 function gen_circle() {
 
     for (i = 0; i < 20; i++) {
-        if (mode == 0){
+        if (mode === 0){
             circleColours = randomColor({
             luminosity: 'dark',
             hue: 'blue',

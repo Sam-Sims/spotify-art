@@ -52,7 +52,6 @@ function setGradient(x, y, w, h, c1, c2, axis) {
   }
 
   function draw() {
-    bpm = 120
     fill(255);
     beginShape();
   

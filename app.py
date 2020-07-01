@@ -69,6 +69,7 @@ def go_visualise():
 def go_visualise_js():
     response = functions.get_visulisation_values(session['toke'])
     data = functions.average_features(response)
+    print(data)
     return render_template("p5js.html", data=data)
 
 

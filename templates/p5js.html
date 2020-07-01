@@ -2,12 +2,10 @@
 {% block content %}
 
     <canvas id="myCanvas" width="960" height="360"></canvas>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
     <script type="text/javascript">
         var dance = {{ data['dance'] }}
         var energy = {{ data['energy'] }}
-        var key = {{ data['key'] }}
+        var music_key = {{ data['key'] }}
         var popularity = {{ data['popularity'] }}
         var valence = {{ data['valence'] }}
         var inst = {{ data['inst'] }}
@@ -15,4 +13,6 @@
         var bpm = {{ data['bpm'] }}
     </script>
     <script src={{ url_for('send_static', path='sketch.js') }}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
 {% endblock %}

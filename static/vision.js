@@ -55,8 +55,10 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     fill(255);
     beginShape();
     let xoff = 0;
-    var dance_value = Math.log(Math.pow(dance, -2.5))
-    var bpm_value = (0.014798 * Math.log(bpm)) - 0.060844
+    dance = 0.5;
+    var dance_value = 0.6 * Math.log(Math.pow(dance, -1.8)) + 0.4;
+    console.log(dance_value)
+    var bpm_value = (0.014798 * Math.log(bpm)) - 0.060844;
   
     // Iterate over horizontal pixels
     for (let x = 0; x <= width; x += Math.pow(energy, -2.5) ){
@@ -70,7 +72,7 @@ function setGradient(x, y, w, h, c1, c2, axis) {
       xoff += 0.05 // wave spikey
     }
     // increment y dimension for noise
-    yoff += bpm_value
+    yoff += bpm_value //speed
     vertex(width, height);
     vertex(0, height);
     endShape(CLOSE);

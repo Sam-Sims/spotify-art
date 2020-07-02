@@ -6,21 +6,23 @@ let background_main, b2;
 
 
 function setup(){
-    if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-        var canvasW = 800;
-        var canvasH = 800;
-      } else {
-        var canvasW = 960;
-        var canvasH = 360;
-      }
+    if (/Android|webOS|iPhone/i.test(navigator.userAgent)) {
+      var canvasW = 375;
+      var canvasH = 800;
+      console.log("in")
+    } else {
+      var canvasW = 960;
+      var canvasH = 360;
+      console.log("in")
+    }
+    var canvas = createCanvas(canvasW, canvasH);
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height / 3) / 2;
+    background_main = color(background_colours[music_key]);
+    b2 = color(200);
 
-      var canvas = createCanvas(canvasW, canvasH);
-      background_main = color(background_colours[music_key]);
-      b2 = color(200);    
-      var x = (windowWidth - width) / 2;
-      var y = (windowHeight - height) / 2;
-
-    canvas.position(x, y);
+    canvas.parent("canvasHolder");
+    //canvas.position(x, y);
     generate_background(canvas)
     
 }
@@ -55,7 +57,6 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     fill(255);
     beginShape();
     let xoff = 0;
-    dance = 0.5;
     var dance_value = 0.6 * Math.log(Math.pow(dance, -1.8)) + 0.4;
     console.log(dance_value)
     var bpm_value = (0.014798 * Math.log(bpm)) - 0.060844;

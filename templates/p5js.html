@@ -1,36 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-    <div class="row">
-        <div class="col">
-            <canvas id="myCanvas" width="960" height="360"></canvas>
-            <script type="text/javascript">
-                var dance =
-                {{ data['dance'] }}
-                var energy =
-                {{ data['energy'] }}
-                var music_key =
-                {{ data['key'] }}
-                var popularity =
-                {{ data['popularity'] }}
-                var valence =
-                {{ data['valence'] }}
-                var inst =
-                {{ data['inst'] }}
-                var mode =
-                {{ data['mode'] }}
-                var bpm =
-                {{ data['bpm'] }}
-            </script>
-            <script src={{ url_for('send_static', path='vision.js') }}></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
+        <div class="row">
+            <div class="col ju">
+                <div id="canvasHolder" class="row justify-content-center">
+                    <script type="text/javascript">
+                        var dance =
+                        {{ data['dance'] }}
+                        var energy =
+                        {{ data['energy'] }}
+                        var music_key =
+                        {{ data['key'] }}
+                        var popularity =
+                        {{ data['popularity'] }}
+                        var valence =
+                        {{ data['valence'] }}
+                        var inst =
+                        {{ data['inst'] }}
+                        var mode =
+                        {{ data['mode'] }}
+                        var bpm =
+                        {{ data['bpm'] }}
+                    </script>
+                    <script src={{ url_for('send_static', path='vision.js') }}></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
+                </div>
+            </div>
         </div>
-    </div>
         <br>
-        <br>
-    <div class="row">
-        <div class="col text-centre">
+        <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
                     <p class="card-text text-center">
@@ -42,11 +41,9 @@
                         The speed of the change is determined by your average BPM.<br>
                         The extremes in amplitude are determined by the "danceability" of your tracks.<br>
                         The closeness of the peaks are determined by the "energy" of your tacks.</p>
-                    </p>
                 </div>
-                <p>
             </div>
         </div>
     </div>
-    </div>
+
 {% endblock %}

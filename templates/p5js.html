@@ -5,22 +5,14 @@
             <div class="col ju">
                 <div id="canvasHolder" class="row justify-content-center">
                     <script type="text/javascript">
-                        var dance =
-                        {{ data['dance'] }}
-                        var energy =
-                        {{ data['energy'] }}
-                        var music_key =
-                        {{ data['key'] }}
-                        var popularity =
-                        {{ data['popularity'] }}
-                        var valence =
-                        {{ data['valence'] }}
-                        var inst =
-                        {{ data['inst'] }}
-                        var mode =
-                        {{ data['mode'] }}
-                        var bpm =
-                        {{ data['bpm'] }}
+                        var dance = {{ data['dance'] }}
+                        var energy = {{ data['energy'] }}
+                        var music_key = {{ data['key'] }}
+                        var popularity = {{ data['popularity'] }}
+                        var valence = {{ data['valence'] }}
+                        var inst = {{ data['inst'] }}
+                        var mode = {{ data['mode'] }}
+                        var bpm = {{ data['bpm'] }}
                     </script>
                     <script src={{ url_for('send_static', path='vision.js') }}></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
@@ -40,7 +32,11 @@
                         <br>
                         The speed of the change is determined by your average BPM.<br>
                         The extremes in amplitude are determined by the "danceability" of your tracks.<br>
-                        The closeness of the peaks are determined by the "energy" of your tacks.</p>
+                        The closeness of the peaks are determined by the "energy" of your tacks.<br>
+                        The background colour is determined by your top songs key signiture. <br>
+                        The colour of the wave represents the emotions of your top songs. Yellows and oranges represent happy songs while reds and purples represnt sad and angry songs.
+
+                    </p>
                 </div>
             </div>
         </div>

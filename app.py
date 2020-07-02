@@ -11,9 +11,16 @@ app = Flask(__name__)
 app.secret_key = environ.get("secret")
 CLI_ID = environ.get("client")
 CLI_SEC = environ.get("secret")
+deploy_type = environ.get("deploy_type")
+if deploy_type == "local":
+    REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
+elif deploy_type == "heroku":
+    REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
+else:
+    REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
+
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
-REDIRECT_URI = "https://sam-spotify-flask.herokuapp.com/api_callback"
 SCOPE = 'user-top-read'
 
 @app.route('/')
@@ -82,7 +89,7 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"https://sam-spotify-flask.herokuapp.com/api_callback",
+        "redirect_uri":REDIRECT_URI,
         "client_id":CLI_ID,
         "client_secret":CLI_SEC
         })

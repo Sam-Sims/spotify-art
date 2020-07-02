@@ -25,8 +25,8 @@ Visulisation workflow:
 Modal key = colour background
 
 BPM converted to speed change using following formula:
-![alt text](https://imgur.com/a/XZpjO0O)
+![Imgur Image](https://imgur.com/xnhIscv.jpg)
 
-Danceability converted to amplitude by: 0.6 * ln(danceability^-1.8) + 0.4
+Danceability converted to amplitude by: ![Imgur Image](https://imgur.com/6OYNWvZ.gif)
 
 

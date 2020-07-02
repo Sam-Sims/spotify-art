@@ -1,7 +1,7 @@
 const Y_AXIS = 1;
 const X_AXIS = 2;
 var background_colours = ['red', 'teal', 'darkgreen', 'mediumorchid', 'orange', 'deeppink', 'cyan', 'steelblue', 'indigo', 'darkslategray', 'mediumseagreen', 'yellow']
-let yoff = 0.0; // 2nd dimension of perlin noise
+let yoff = 0.0; // 
 let background_main, b2;
 
 
@@ -54,22 +54,23 @@ function setGradient(x, y, w, h, c1, c2, axis) {
   function draw() {
     fill(255);
     beginShape();
-  
     let xoff = 0;
+    var dance_value = Math.log(Math.pow(dance, -2.5))
+    var bpm_value = (0.014798 * Math.log(bpm)) - 0.060844
   
     // Iterate over horizontal pixels
     for (let x = 0; x <= width; x += Math.pow(energy, -2.5) ){
       // Calculate a y value according to noise, map to
   
-      let y = map(noise(xoff, yoff), 0, 1, 200, 300);
+      let y = map(noise(xoff, yoff), 0, dance_value, 200, 300);
   
       // Set the vertex
       vertex(x, y);
       // Increment x dimension for noise
-      xoff += 0.05
+      xoff += 0.05 // wave spikey
     }
     // increment y dimension for noise
-    yoff += 0.01
+    yoff += bpm_value
     vertex(width, height);
     vertex(0, height);
     endShape(CLOSE);

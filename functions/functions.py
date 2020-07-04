@@ -83,6 +83,14 @@ def average_features(features):
         inst.append(item['instrumentalness'])
         mode.append(item['mode'])
         bpm.append(item['bpm'])
+    music_mode = statistics.mode(mode)
+
+    if music_mode == 1:
+        text_mode = "major"
+    elif music_mode == 0:
+        text_mode = "minor"
+    else:
+        text_mode = "null"
     dict_of_avr = {
         "dance": statistics.mean(danceability),
         "energy": statistics.mean(energy),
@@ -91,6 +99,7 @@ def average_features(features):
         "valence": statistics.mean(valence),
         "inst": statistics.mean(inst),
         "mode": statistics.mode(mode),
+        "text_mode": text_mode,
         "bpm": statistics.mean(bpm)
     }
     return dict_of_avr
@@ -169,3 +178,16 @@ def construct_report(evaluation):
     mountain_string = f"The mountain is {evaluation['mountain']} because of the {mountain_explained} energy of your top tracks. "
     report_string = report_string + mountain_string
     return report_string
+
+def construct_report_js(averages):
+    key_notation = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
+    key = key_notation[averages['key']]
+    dance_percent = str(round((averages['dance'] * 100), 2))
+    energy = str(round((averages['energy'] * 100), 2))
+    print(dance_percent)
+    report ={
+        "key": key,
+        "dance_percent": dance_percent,
+        "energy": energy,
+    }
+    return report

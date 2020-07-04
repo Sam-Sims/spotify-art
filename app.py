@@ -76,8 +76,9 @@ def go_visualise():
 def go_visualise_js():
     response = functions.get_visulisation_values(session['toke'])
     data = functions.average_features(response)
+    report = functions.construct_report_js(data)
     print(data)
-    return render_template("p5js.html", data=data)
+    return render_template("p5js.html", data=data, report=report)
 
 
 @app.route("/api_callback")

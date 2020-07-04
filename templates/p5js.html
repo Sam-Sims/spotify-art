@@ -2,17 +2,17 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col ju">
+            <div class="col">
                 <div id="canvasHolder" class="row justify-content-center">
                     <script type="text/javascript">
-                        var dance = {{ data['dance'] }}
-                        var energy = {{ data['energy'] }}
-                        var music_key = {{ data['key'] }}
-                        var popularity = {{ data['popularity'] }}
-                        var valence = {{ data['valence'] }}
-                        var inst = {{ data['inst'] }}
-                        var mode = {{ data['mode'] }}
-                        var bpm = {{ data['bpm'] }}
+                        var dance = {{ data['dance'] }};
+                        var energy = {{ data['energy'] }};
+                        var music_key = {{ data['key'] }};
+                        var popularity = {{ data['popularity'] }};
+                        var valence = {{ data['valence'] }};
+                        var inst = {{ data['inst'] }};
+                        var mode = {{ data['mode'] }};
+                        var bpm = {{ data['bpm'] }};
                     </script>
                     <script src={{ url_for('send_static', path='vision.js') }}></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
@@ -22,21 +22,41 @@
         </div>
         <br>
         <div class="row justify-content-center">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text text-center">
-                        This is a wave dynamically generated using the <a
-                            href="https://en.wikipedia.org/wiki/Perlin_noise">perlin
-                        noise </a>
-                        algorithim combined with your spotify data.
-                        <br>
-                        The speed of the change is determined by your average BPM.<br>
-                        The extremes in amplitude are determined by the "danceability" of your tracks.<br>
-                        The closeness of the peaks are determined by the "energy" of your tacks.<br>
-                        The background colour is determined by your top songs key signiture. <br>
-                        The colour of the wave represents the emotions of your top songs. Yellows and oranges represent happy songs while reds and purples represnt sad and angry songs.
+            <div class="card ">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs pull-right justify-content-center" id="myTab"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Your Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="explained-tab" data-toggle="tab" href="#explained" role="tab"
+                               aria-controls="explained" aria-selected="false">Explanation</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    </p>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p class="card-text text-center">
+                                This is a wave dynamically generated using the <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise </a>algorithim combined with your spotify data.<br><br>
+                                The background colour is determined by your most listend to key signiture, which is {{ report['key'] }} <br>
+                                The colour of the wave represents the emotions of your top songs: Yellows and oranges represent happy songs while reds, purples and blues represent sad and angry songs.<br><br>
+                                Your average BPM is {{ data['bpm'] }}, which determines the speed that the wave changes.<br>
+                                Your tracks are {{ report['dance_percent'] }}% danceable, which determines the extremes of amplitude.<br>
+                                Your tracks have an energy score of {{ report['energy'] }}, which determines the closeness of the peaks.<br>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="explained" role="tabpanel" aria-labelledby="explained-tab">
+                            <p class="card-text text-center">
+                                The average key is calculated by pulling your top 20 songs from spotify (and their key). The key that occurs the most (or mode) is then calculated to find the average. <br><br>
+                                Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0 is least danceable and 100 is most danceable.<br><br>
+                                Energy is a measure from 0 to 100 and represents a measure of intensity and activity. Typically, energetic tracks feel fast and loud.<br><br>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

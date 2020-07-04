@@ -72,12 +72,13 @@ def go_visualise():
     report = functions.construct_report(evaluation)
     return render_template("visulise.html", report=report)
 
-@app.route('/go_top_visualise_js', methods=['POST'])
+@app.route('/go_top_visualise_js', methods=['GET', 'POST'])
 def go_visualise_js():
     response = functions.get_visulisation_values(session['toke'])
     data = functions.average_features(response)
+    report = functions.construct_report_js(data)
     print(data)
-    return render_template("p5js.html", data=data)
+    return render_template("p5js.html", data=data, report=report)
 
 
 @app.route("/api_callback")
@@ -97,7 +98,7 @@ def api_callback():
     res_body = res.json()
     session["toke"] = res_body.get("access_token")
 
-    return redirect("hub")
+    return redirect("go_top_visualise_js")
 
 @app.route('/static/<path:path>')
 def send_static(path):

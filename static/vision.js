@@ -8,6 +8,8 @@ let mode_colours_1, mode_colours_2;
 
 
 function setup() {
+    console.log("test");
+    console.log(mode)
     if (/Android|webOS|iPhone/i.test(navigator.userAgent)) {
         var canvasW = 375;
         var canvasH = 800;
@@ -17,31 +19,33 @@ function setup() {
         var canvasH = 360;
         console.log("in")
     }
-    if (mode === 1) {
+    if (valence > 0.5) {
+        console.log("in3");
         mode_colours_1 = randomColor({
             count: 10,
             hue: 'orange',
             luminosity: 'light',
-            format: 'rgb'
+            format: 'rgba'
         });
+        console.log("in2")
         mode_colours_2 = randomColor({
             count: 10,
             hue: 'yellow',
             luminosity: 'light',
-            format: 'rgb'
+            format: 'rgba'
         });
     } else {
         mode_colours_1 = randomColor({
             count: 10,
-            hue: 'purple',
+            hue: 'blue',
             luminosity: 'light',
-            format: 'rgb'
+            format: 'rgba'
         });
         mode_colours_2 = randomColor({
             count: 10,
             hue: 'red',
             luminosity: 'dark',
-            format: 'rgb'
+            format: 'rgba'
         });
     }
     console.log(mode_colours_1);
@@ -88,7 +92,7 @@ function setGradient(x, y, w, h, c1, c2, axis) {
 
 function draw() {
     fill(lerpColor(startColor, newColor, amt));
-    amt += 0.005;
+    amt += 0.0035;
     if (amt >= 1) {
         amt = 0.0;
         startColor = newColor;

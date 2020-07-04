@@ -1,6 +1,6 @@
 const Y_AXIS = 1;
 const X_AXIS = 2;
-var background_colours = ['red', 'teal', 'darkgreen', 'mediumorchid', 'orange', 'deeppink', 'cyan', 'steelblue', 'indigo', 'darkslategray', 'mediumseagreen', 'yellow']
+var background_colours = ['firebrick', 'teal', 'darkgreen', 'mediumorchid', 'orange', 'deeppink', 'turquoise', 'steelblue', 'indigo', 'darkslategray', 'mediumseagreen', 'khaki']
 let yoff = 0.0; // 
 let background_main, b2;
 let amt, startColour, newColour;

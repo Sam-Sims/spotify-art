@@ -1,4 +1,4 @@
-# spotify-flask
+# spotify-art
 
 This is a project aimed at visulising your spotify data. Developed using flask and python for the spotify API calls. The p5js library was used for the visulisation.
 

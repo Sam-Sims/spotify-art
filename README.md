@@ -2,6 +2,10 @@
 
 This is a project aimed at visulising your spotify data. Developed using flask and python for the spotify API calls. The p5js library was used for the visulisation.
 
+## Deployment
+
+The website can be found at https://sam-spotify-flask.herokuapp.com
+
 ## Installation
 
 To install the webserver locally, download, install requirements and run app.py

@@ -33,6 +33,6 @@ BPM converted to speed change using following formula:
 
 Danceability converted to amplitude by: ![Imgur Image](https://imgur.com/6OYNWvZ.gif)
 
-Energy converted to closeness of x-axis spikes by energy^2.5
+Energy converted to freq spikes by energy^2.5
 
 

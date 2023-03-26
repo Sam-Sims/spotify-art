@@ -4,7 +4,7 @@ This is a project aimed at visulising your spotify data. Developed using flask a
 
 ## Deployment
 
-The website can be found at https://sam-spotify-flask.herokuapp.com
+The website can be found at https://spotify-flask.onrender.com/
 
 ## Installation
 
